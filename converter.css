@@ -1,10 +1,10 @@
 :root {
   color-scheme: light dark;
-  --bg: #fefae0;
-  --panel: #fffdf0;
-  --fg: #283618;
-  --muted: #6b6f4f;
-  --line: #d9d3b0;
+  --bg: #ffffff;
+  --panel: #f6f6f4;
+  --fg: #1f1f1d;
+  --muted: #6b6b66;
+  --line: #deded8;
   --accent: #606c38;
   --accent-fg: #fefae0;
   --highlight: #bc6c25;
@@ -13,11 +13,11 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1d2611;
-    --panel: #283618;
-    --fg: #fefae0;
-    --muted: #b8b89a;
-    --line: #3f4d2a;
+    --bg: #18181a;
+    --panel: #222225;
+    --fg: #ededea;
+    --muted: #9d9d97;
+    --line: #36363a;
     --accent: #dda15e;
     --accent-fg: #283618;
     --highlight: #dda15e;
@@ -43,9 +43,19 @@ main {
   gap: 12px;
 }
 
-header { display: flex; align-items: center; gap: 10px; }
-header img { border-radius: 7px; }
-h1 { margin: 0; font-size: 17px; letter-spacing: 0.01em; }
+body::before {
+  content: "";
+  position: fixed;
+  right: -60px;
+  bottom: -60px;
+  width: 280px;
+  height: 280px;
+  background: url(icons/logo.svg) center / contain no-repeat;
+  opacity: 0.06;
+  transform: rotate(-12deg);
+  pointer-events: none;
+  z-index: -1;
+}
 
 #drop {
   display: grid;
@@ -107,7 +117,7 @@ kbd {
   padding: 0;
   border: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 6px;
 }
 .formats legend { padding: 0; margin-bottom: 6px; font-size: 12px; color: var(--muted); }

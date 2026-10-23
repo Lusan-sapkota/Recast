@@ -1,4 +1,4 @@
-import { DEFAULTS, convert, fetchImage, cleanName } from './convert.js';
+import { FORMATS, DEFAULTS, convert, fetchImage, cleanName } from './convert.js';
 
 const $ = sel => document.querySelector(sel);
 const drop = $('#drop');
@@ -18,6 +18,14 @@ let items = [];
 let loadRun = 0;
 let busy = false;
 
+$('#formats').append(...Object.entries(FORMATS).map(([ext, { label }]) => {
+  const option = document.createElement('label');
+  const radio = Object.assign(document.createElement('input'), { type: 'radio', name: 'format', value: ext });
+  const text = Object.assign(document.createElement('span'), { textContent: label });
+  option.append(radio, text);
+  return option;
+}));
+
 const settings = await chrome.storage.sync.get(DEFAULTS);
 ($(`input[name=format][value="${settings.format}"]`) ?? $('input[name=format]')).checked = true;
 quality.value = settings.quality;
@@ -29,7 +37,7 @@ function selectedFormat() {
 }
 
 function syncQuality() {
-  qualityRow.hidden = selectedFormat() === 'png';
+  qualityRow.hidden = !FORMATS[selectedFormat()].lossy;
   qualityValue.textContent = quality.value;
 }
 

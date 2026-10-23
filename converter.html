@@ -10,11 +10,6 @@
 </head>
 <body>
   <main>
-    <header>
-      <img src="icons/logo.svg" alt="" width="28" height="28">
-      <h1>Recast</h1>
-    </header>
-
     <button id="drop" type="button" aria-describedby="meta">
       <span id="thumbs"></span>
       <span class="prompt">
@@ -25,11 +20,8 @@
     <input id="file" type="file" accept="image/*" multiple hidden>
     <p id="meta"></p>
 
-    <fieldset class="formats">
+    <fieldset id="formats" class="formats">
       <legend>Save as</legend>
-      <label><input type="radio" name="format" value="png"><span>PNG</span></label>
-      <label><input type="radio" name="format" value="jpg"><span>JPG</span></label>
-      <label><input type="radio" name="format" value="webp"><span>WebP</span></label>
     </fieldset>
 
     <label id="quality-row" class="row">

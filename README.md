@@ -4,7 +4,7 @@
 
 <h1 align="center">Recast</h1>
 
-<p align="center">Save any image as PNG, JPG or WebP. Right from the page, entirely in your browser.</p>
+<p align="center">Save any image as PNG, JPG, WebP, ICO or BMP. Right from the page, entirely in your browser.</p>
 
 <p align="center">
   <a href="https://github.com/Lusan-sapkota/Recast/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/Lusan-sapkota/Recast?color=606c38&label=release"></a>
@@ -20,12 +20,13 @@ Sites often send WebP or AVIF even when the link says `.png`, so "Save image as"
 
 ## Features
 
-- **Right-click any image** → *Save image as type* → PNG, JPG or WebP
+- **Right-click any image** → *Save image as type* → PNG, JPG, WebP, ICO or BMP
+- **ICO** contains 16, 32, 48 and 256 px sizes, ready to use as a favicon
 - **Converter window** (toolbar icon or <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd>): drop, browse or paste (<kbd>Ctrl</kbd>+<kbd>V</kbd>) an image or image URL
 - **Batch:** convert several images in one go
 - **Copy as PNG** to the clipboard
 - Real save dialog, original filename kept, `.jpg` never `.jfif`
-- Transparent areas turn white in JPG instead of black
+- Transparent areas turn white in JPG and BMP instead of black
 - SVG input supported, quality slider for JPG and WebP
 
 ## Privacy
@@ -44,7 +45,7 @@ Works in Chrome, Brave, Edge and other Chromium browsers (version 116+).
 
 - Hotlink-protected and `blob:` images can't be fetched; the toolbar icon shows a red `!` with the reason.
 - Animated images save as their first frame. Metadata (EXIF) is not kept.
-- AVIF and GIF output are not possible: browsers can't encode them.
+- No AVIF or GIF output: browsers can't encode them natively.
 
 ## License
 

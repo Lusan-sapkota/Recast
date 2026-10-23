@@ -14,13 +14,22 @@ chrome.runtime.onInstalled.addListener(() => {
   });
 });
 
-chrome.action.onClicked.addListener(async () => {
+chrome.action.onClicked.addListener(async tab => {
   const [open] = await chrome.runtime.getContexts({
     contextTypes: ['TAB'],
     documentUrls: [chrome.runtime.getURL(CONVERTER)],
   });
   if (open) return chrome.windows.update(open.windowId, { focused: true });
-  chrome.windows.create({ url: CONVERTER, type: 'popup', width: 440, height: 700 });
+  const width = 460;
+  const height = 640;
+  const parent = await chrome.windows.get(tab.windowId).catch(() => null);
+  const position = Number.isFinite(parent?.left) && Number.isFinite(parent?.width)
+    ? {
+        left: Math.round(parent.left + (parent.width - width) / 2),
+        top: Math.round(parent.top + Math.max(0, (parent.height - height) / 2)),
+      }
+    : {};
+  chrome.windows.create({ url: CONVERTER, type: 'popup', width, height, ...position });
 });
 
 chrome.contextMenus.onClicked.addListener(async ({ menuItemId: ext, srcUrl }, tab) => {
