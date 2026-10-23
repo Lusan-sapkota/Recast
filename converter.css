@@ -1,0 +1,148 @@
+:root {
+  color-scheme: light dark;
+  --bg: #fefae0;
+  --panel: #fffdf0;
+  --fg: #283618;
+  --muted: #6b6f4f;
+  --line: #d9d3b0;
+  --accent: #606c38;
+  --accent-fg: #fefae0;
+  --highlight: #bc6c25;
+  --error: #b42318;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1d2611;
+    --panel: #283618;
+    --fg: #fefae0;
+    --muted: #b8b89a;
+    --line: #3f4d2a;
+    --accent: #dda15e;
+    --accent-fg: #283618;
+    --highlight: #dda15e;
+    --error: #f2836b;
+  }
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  font: 14px/1.45 system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+main {
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+header { display: flex; align-items: center; gap: 10px; }
+header img { border-radius: 7px; }
+h1 { margin: 0; font-size: 17px; letter-spacing: 0.01em; }
+
+#drop {
+  display: grid;
+  place-items: center;
+  height: 240px;
+  padding: 12px;
+  border: 2px dashed var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+  overflow: hidden;
+}
+#drop:hover, #drop:focus-visible, #drop.over { border-color: var(--highlight); color: var(--fg); outline: none; }
+#drop.over { background: color-mix(in srgb, var(--highlight) 12%, var(--panel)); }
+#drop.has-image { border-style: solid; }
+#drop.has-image .prompt { display: none; }
+#drop:not(.has-image) #thumbs { display: none; }
+
+#thumbs { display: grid; place-items: center; width: 100%; height: 100%; }
+#thumbs img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  background: repeating-conic-gradient(#8883 0 25%, transparent 0 50%) 0 0 / 16px 16px;
+}
+#drop.multi { place-items: stretch; }
+#drop.multi #thumbs {
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  grid-auto-rows: 72px;
+  align-content: start;
+  gap: 6px;
+  overflow-y: auto;
+}
+#drop.multi #thumbs img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
+
+.prompt { text-align: center; }
+.prompt strong { color: var(--fg); }
+kbd {
+  padding: 1px 5px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font: 12px ui-monospace, monospace;
+}
+
+#meta, #status, .note {
+  margin: 0;
+  min-height: 1.45em;
+  font-size: 12px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.note { min-height: 0; margin-top: -6px; }
+#status.error { color: var(--error); }
+
+.formats {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.formats legend { padding: 0; margin-bottom: 6px; font-size: 12px; color: var(--muted); }
+.formats label { position: relative; }
+.formats input { position: absolute; opacity: 0; }
+.formats span {
+  display: block;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+}
+.formats input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+.formats input:focus-visible + span { outline: 2px solid var(--highlight); outline-offset: 2px; }
+
+.row { display: flex; align-items: center; gap: 8px; }
+#quality { flex: 1; }
+#quality-value { min-width: 3ch; text-align: right; font-variant-numeric: tabular-nums; }
+input[type=range], input[type=checkbox] { accent-color: var(--accent); }
+.row:has(input:disabled) { opacity: 0.6; }
+
+.actions { display: grid; grid-template-columns: 1fr 2fr; gap: 8px; }
+.actions button {
+  padding: 10px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.actions button.secondary { background: transparent; color: var(--fg); border-color: var(--line); }
+.actions button:focus-visible { outline: 2px solid var(--highlight); outline-offset: 2px; }
+.actions button:disabled { opacity: 0.4; cursor: default; }

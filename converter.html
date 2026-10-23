@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recast</title>
+  <link rel="icon" href="icons/logo.svg">
+  <link rel="stylesheet" href="converter.css">
+  <script type="module" src="converter.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <img src="icons/logo.svg" alt="" width="28" height="28">
+      <h1>Recast</h1>
+    </header>
+
+    <button id="drop" type="button" aria-describedby="meta">
+      <span id="thumbs"></span>
+      <span class="prompt">
+        <strong>Drop images</strong> or click to browse<br>
+        <kbd>Ctrl</kbd> + <kbd>V</kbd> pastes an image or image URL
+      </span>
+    </button>
+    <input id="file" type="file" accept="image/*" multiple hidden>
+    <p id="meta"></p>
+
+    <fieldset class="formats">
+      <legend>Save as</legend>
+      <label><input type="radio" name="format" value="png"><span>PNG</span></label>
+      <label><input type="radio" name="format" value="jpg"><span>JPG</span></label>
+      <label><input type="radio" name="format" value="webp"><span>WebP</span></label>
+    </fieldset>
+
+    <label id="quality-row" class="row">
+      Quality
+      <input id="quality" type="range" min="10" max="100">
+      <output id="quality-value" for="quality"></output>
+    </label>
+    <label class="row"><input id="ask" type="checkbox"> Ask where to save</label>
+    <p id="ask-note" class="note" hidden>Several images go straight to your Downloads folder.</p>
+
+    <div class="actions">
+      <button id="copy" type="button" class="secondary" disabled>Copy as PNG</button>
+      <button id="go" type="button" disabled>Download</button>
+    </div>
+    <p id="status" role="status"></p>
+  </main>
+</body>
+</html>
